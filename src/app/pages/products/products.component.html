@@ -1,0 +1,10 @@
+<app-header></app-header>
+<div class="row">
+    <app-side-bar (sender)="carsfilter($event)"></app-side-bar>
+    <div class="products">
+        <div class="item" *ngFor="let car   of cars ;trackBy: trackById">
+            {{car.value}}
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

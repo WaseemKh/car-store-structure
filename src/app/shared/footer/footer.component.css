@@ -1,0 +1,14 @@
+/*footer*/
+
+.footer {
+    text-align: center;
+    /* border: 1px solid black;*/
+    position: relative;
+    top: 16px
+}
+
+.footer p {
+    color: #a5a5a5;
+    font-size: 20px;
+
+}
