@@ -1,7 +1,7 @@
 .sidBar {
 
     border: 2px  solid #bbb;
-    border-top: 0;
+    /* border-top: 0; */
     
     min-width: 100%;
     /* min-height: 100%; */

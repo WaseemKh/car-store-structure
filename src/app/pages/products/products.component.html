@@ -1,4 +1,5 @@
 <app-header></app-header>
+<app-search (searcher)="search($event)"></app-search>
 <div class="row">
     <app-side-bar (sender)="carsfilter($event)"></app-side-bar>
     <div class="products">

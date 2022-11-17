@@ -21,7 +21,7 @@ export class SideBarComponent implements OnInit {
     return reaction.id; // unique id corresponding to the item
   }
 
-  Filter(itemtype) {
+  filter(itemtype) {
     this.sender.emit(itemtype);
   }
 }

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { pipe, Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-products',
@@ -7,7 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
   cars;
-  constructor() { }
+
+  constructor(
+
+  ) {
+
+  }
 
   ngOnInit() {
     this.getCarList();
@@ -18,11 +27,34 @@ export class ProductsComponent implements OnInit {
   carsfilter(itemType) {
     this.getCarList();
     this.cars = this.cars.filter(a => {
-      if (a.Key == itemType || itemType=="All")
+      if (a.Key == itemType || itemType == "All")
         return a;
     })
 
   }
+
+  search(searchValue) {
+
+
+
+    if (searchValue) {
+      searchValue.valueChanges.pipe(
+
+        debounceTime(1000),
+        //distinctUntilChanged,
+        // switchMap((c) => this.cars)
+      ).subscribe((v) => {
+
+        this.cars = this.cars.filter(x => x.value.toLocaleUpperCase().includes(searchValue.value.toLocaleUpperCase()))
+      }
+      );
+    } else {
+      this.getCarList();
+    }
+
+  }
+
+
 
 
   getCarList() {
