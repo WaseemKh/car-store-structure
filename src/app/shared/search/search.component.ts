@@ -28,12 +28,9 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-
-    console.log(this.groupForm.get('search'));
     this.searcher.emit(this.groupForm.get('search'));
   }
   search2() {
-    console.log(this.groupForm.get('search'));
     this.searcher.emit(null);
   }
 }

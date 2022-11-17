@@ -1,10 +1,7 @@
-
-.input-search{
+.input-search {
     width: 50%;
     border: 2px solid black;
     line-height: 3;
-float: right;
-text-align: right;
-
-	
+    float: right;
+    text-align: right;
 }

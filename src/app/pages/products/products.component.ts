@@ -11,6 +11,7 @@ import { pipe, Subscription } from 'rxjs';
 })
 export class ProductsComponent implements OnInit {
   cars;
+  itemType;
 
   constructor(
 
@@ -26,6 +27,7 @@ export class ProductsComponent implements OnInit {
 
   carsfilter(itemType) {
     this.getCarList();
+    this.itemType = itemType;
     this.cars = this.cars.filter(a => {
       if (a.Key == itemType || itemType == "All")
         return a;
@@ -34,6 +36,8 @@ export class ProductsComponent implements OnInit {
   }
 
   search(searchValue) {
+    console.log(searchValue);
+    console.log(this.itemType);
 
 
 
@@ -41,13 +45,27 @@ export class ProductsComponent implements OnInit {
       searchValue.valueChanges.pipe(
 
         debounceTime(1000),
-        //distinctUntilChanged,
-        // switchMap((c) => this.cars)
+
+
       ).subscribe((v) => {
 
         this.cars = this.cars.filter(x => x.value.toLocaleUpperCase().includes(searchValue.value.toLocaleUpperCase()))
       }
       );
+    }
+
+    else if (searchValue & this.itemType) {
+      this.carsfilter(this.itemType);
+      searchValue.valueChanges.pipe(
+
+        debounceTime(1000),
+      ).subscribe((v) => {
+
+        this.cars = this.cars.filter(x => x.value.toLocaleUpperCase().includes(searchValue.value.toLocaleUpperCase()))
+      }
+      );
+    } else if (this.itemType) {
+      this.carsfilter(this.itemType);
     } else {
       this.getCarList();
     }
@@ -58,6 +76,7 @@ export class ProductsComponent implements OnInit {
 
 
   getCarList() {
+    this.itemType = null;
     this.cars = [{ "Key": "BMW", "value": "A" },
     { "Key": "BMW", "value": "B" }, { "Key": "BMW", "value": "C" }, { "Key": "BMW", "value": "D" }, { "Key": "BMW", "value": "E" },
     { "Key": "VW", "value": "Jetta" },
